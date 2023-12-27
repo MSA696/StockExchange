@@ -29,11 +29,16 @@ namespace StockExchange1
 
         private async void LoadTradingPairData()
         {
-            // Fetch trading pair data from Business Layer
-            List<BusinessLayer1.TradingService.TradingPair> tradingPairs = await _tradingService.GetTradingPairs();
+            while (true)
+            {
+                // Fetch trading pair data from Business Layer
+                List<BusinessLayer1.TradingService.TradingPair> tradingPairs = await _tradingService.GetTradingPairs();
 
-            // Bind the data to the DataGrid
-            dataGridTradingPairs.ItemsSource = tradingPairs;
+                // Bind the data to the DataGrid
+                dataGridTradingPairs.ItemsSource = tradingPairs;
+                await Task.Delay(2000); // Simulate changes every 2 seconds
+                await _tradingService.SimulateTradesAndUpdateValues();
+            }
         }
     }
 }

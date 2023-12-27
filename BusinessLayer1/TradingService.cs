@@ -26,9 +26,7 @@ namespace BusinessLayer1
 
             Random random = new Random();
 
-            while (true) // Loop to simulate continuous updates
-            {
-                foreach (var pairId in pairValueMap.Keys)
+             foreach (var pairId in pairValueMap.Keys)
                 {
                     var (minValue, maxValue) = pairValueMap[pairId];
 
@@ -45,17 +43,17 @@ namespace BusinessLayer1
                         pairValueMap[pairId] = (newMinValue, newMaxValue);
                         Console.WriteLine($"Values changed for PairId: {pairId}. New MinValue: {newMinValue}, New MaxValue: {newMaxValue}");
                     }
-                }
-
-                await Task.Delay(2000); // Simulate changes every 2 seconds
-            }
+                }          
         }
         private async Task InitializePairValueMap()
         {
             var pairs = await _dataLayer.GetCurrencyPairs(); // Fetch initial pair values from the database
+
+            pairValueMap.Clear(); // Clear existing values before adding new ones
+
             foreach (var pair in pairs)
             {
-                pairValueMap.Add(pair.PairId, (pair.MinValue, pair.MaxValue));
+                pairValueMap[pair.PairId] = (pair.MinValue, pair.MaxValue); // Override existing or add new values
             }
         }
         /*public async Task<List<CurrencyPair>> GetTradingPairs()

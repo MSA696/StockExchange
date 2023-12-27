@@ -9,6 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="BusinessLayer1\**" />
+    <Compile Remove="DataLayer1\**" />
+    <EmbeddedResource Remove="BusinessLayer1\**" />
+    <EmbeddedResource Remove="DataLayer1\**" />
+    <None Remove="BusinessLayer1\**" />
+    <None Remove="DataLayer1\**" />
+    <Page Remove="BusinessLayer1\**" />
+    <Page Remove="DataLayer1\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
